@@ -1,0 +1,67 @@
+========================================================
+GUIA DE INSTALAÇÃO: DICIONÁRIO DE ESTUDOS (WINDOWS 11)
+========================================================
+
+Este guia explica como configurar e executar o seu dicionário 
+em um computador recém-formatado utilizando o inicializador invisível.
+
+--------------------------------------------------------
+1. ESTE SCRIPT É SEGURO?
+--------------------------------------------------------
+SIM, é 100% seguro. Aqui estão os motivos:
+
+- Código Transparente: Você tem acesso total ao que está escrito 
+  no "dict.ps1" e no "iniciar.vbs". Não há arquivos ocultos.
+- Sem Conexão Externa: O script funciona totalmente offline, 
+  usando apenas os recursos nativos do seu Windows.
+- Segurança Preservada: O inicializador utiliza o parâmetro 
+  "-Bypass" temporariamente apenas para o dicionário rodar. 
+  Isso significa que você NÃO precisa alterar as travas de 
+  segurança globais do seu Windows para que ele funcione.
+
+--------------------------------------------------------
+2. PREPARAÇÃO DOS ARQUIVOS
+--------------------------------------------------------
+Passo 1: Crie ou mova a pasta do projeto para o novo PC 
+         (ex: Documentos\Dicionario).
+Passo 2: Certifique-se de que os 3 arquivos estão juntos 
+         na mesma pasta:
+         • dict.ps1      (Script principal)
+         • wordlist.txt  (Seu banco de palavras)
+         • iniciar.vbs   (O ativador invisível)
+
+--------------------------------------------------------
+3. DESBLOQUEIO DO WINDOWS (Apenas na 1ª vez)
+--------------------------------------------------------
+Se você transferiu esses arquivos via nuvem, e-mail ou pen 
+drive, o Windows os bloqueará preventivamente por terem 
+vindo de outro computador. Para liberá-los:
+
+Passo 1: Clique com o botão direito no arquivo "dict.ps1" 
+         e escolha "Propriedades".
+Passo 2: Na aba "Geral", olhe a parte inferior. Se houver 
+         uma caixa chamada "Desbloquear", marque-a e clique em OK.
+Passo 3: Faça o mesmo procedimento para o arquivo "iniciar.vbs".
+
+--------------------------------------------------------
+4. COMO EXECUTAR O DICIONÁRIO
+--------------------------------------------------------
+
+MÉTODO DIRETO:
+- Dê um duplo clique diretamente no arquivo "iniciar.vbs". 
+  A tela preta do terminal não vai aparecer; a interface 
+  gráfica do dicionário abrirá direto.
+
+MÉTODO COM TECLA DE ATALHO (Recomendado):
+1. Clique com o botão direito no "iniciar.vbs" > Mostrar mais 
+   opções > Enviar para > Área de trabalho (criar atalho).
+2. Na Área de Trabalho, clique com o botão direito no 
+   novo atalho criado e vá em "Propriedades".
+3. Clique no campo "Tecla de atalho" e aperte a combinação 
+   que desejar (Ex: Ctrl + Alt + D).
+4. Clique em Aplicar e OK.
+
+*(Nota: Você não precisa mais alterar os campos "Destino" 
+ou "Executar" nas propriedades do atalho. O arquivo .vbs 
+já cuida de tudo sozinho!)*
+========================================================
