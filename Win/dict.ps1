@@ -71,59 +71,74 @@ while ($true) {
         # Fala automática (assíncrona para não travar a interface)
         $synth.SpeakAsync($palavra_en) | Out-Null
 
-        # Constrói a janela de exibição (substitui o YAD)
+        # Janela de exibição com interface mais limpa e legível
         $form = New-Object System.Windows.Forms.Form
-        $form.Text = $palavra_full
-        $form.Size = New-Object System.Drawing.Size(480, 420)
+        $form.Text = "Dicionário - $palavra_full"
+        $form.Size = New-Object System.Drawing.Size(720, 560)
         $form.StartPosition = 'CenterScreen'
         $form.FormBorderStyle = 'FixedDialog'
         $form.MaximizeBox = $false
+        $form.MinimizeBox = $false
+        $form.BackColor = [System.Drawing.Color]::White
+        $form.Font = New-Object System.Drawing.Font("Segoe UI", 10)
 
-        # Caixa de texto com os detalhes
+        # Título da palavra
+        $lblPalavra = New-Object System.Windows.Forms.Label
+        $lblPalavra.Text = $palavra_full
+        $lblPalavra.Location = New-Object System.Drawing.Point(25, 20)
+        $lblPalavra.Size = New-Object System.Drawing.Size(655, 40)
+        $lblPalavra.Font = New-Object System.Drawing.Font("Segoe UI", 18, [System.Drawing.FontStyle]::Bold)
+        $lblPalavra.ForeColor = [System.Drawing.Color]::FromArgb(35, 35, 35)
+        $form.Controls.Add($lblPalavra)
+
+        # Área de texto
         $txt = New-Object System.Windows.Forms.TextBox
         $txt.Multiline = $true
         $txt.ReadOnly = $true
         $txt.ScrollBars = 'Vertical'
-        $txt.Dock = 'Top'
-        $txt.Height = 300
-        $txt.Font = New-Object System.Drawing.Font("Consolas", 11)
-        
-        # Monta o texto de forma limpa
+        $txt.Location = New-Object System.Drawing.Point(25, 75)
+        $txt.Size = New-Object System.Drawing.Size(655, 365)
+        $txt.Font = New-Object System.Drawing.Font("Segoe UI", 11)
+        $txt.BackColor = [System.Drawing.Color]::FromArgb(248, 248, 248)
+        $txt.ForeColor = [System.Drawing.Color]::FromArgb(40, 40, 40)
+        $txt.BorderStyle = 'FixedSingle'
+
+        # Mantém exatamente as mesmas informações exibidas pela versão original
         $textoExibicao = "Palavra: $palavra_full`r`n`r`nExplicação:`r`n$explicacao`r`n`r`nExemplos:`r`n"
-        if ($ex1) { $textoExibicao += "1. $ex1`r`n" }
-        if ($ex2) { $textoExibicao += "2. $ex2`r`n" }
-        if ($ex3) { $textoExibicao += "3. $ex3`r`n" }
-        if ($ex4) { $textoExibicao += "4. $ex4`r`n" }
-        if ($ex5) { $textoExibicao += "5. $ex5`r`n" }
-        
+        if ($ex1) { $textoExibicao += "`r`n1. $ex1`r`n" }
+        if ($ex2) { $textoExibicao += "`r`n2. $ex2`r`n" }
+        if ($ex3) { $textoExibicao += "`r`n3. $ex3`r`n" }
+        if ($ex4) { $textoExibicao += "`r`n4. $ex4`r`n" }
+        if ($ex5) { $textoExibicao += "`r`n5. $ex5`r`n" }
+
         $txt.Text = $textoExibicao
         $form.Controls.Add($txt)
 
         # Botão: Repetir Pronúncia
         $btnRepetir = New-Object System.Windows.Forms.Button
         $btnRepetir.Text = "Repetir Pronúncia"
-        $btnRepetir.Bounds = New-Object System.Drawing.Rectangle(40, 320, 160, 40)
+        $btnRepetir.Location = New-Object System.Drawing.Point(25, 460)
+        $btnRepetir.Size = New-Object System.Drawing.Size(205, 42)
+        $btnRepetir.Font = New-Object System.Drawing.Font("Segoe UI", 10, [System.Drawing.FontStyle]::Bold)
         $btnRepetir.Add_Click({ $synth.SpeakAsync($palavra_en) | Out-Null })
         $form.Controls.Add($btnRepetir)
 
         # Botão: Voltar ao Menu
         $btnVoltar = New-Object System.Windows.Forms.Button
         $btnVoltar.Text = "Voltar ao Menu"
-        $btnVoltar.Bounds = New-Object System.Drawing.Rectangle(260, 320, 160, 40)
+        $btnVoltar.Location = New-Object System.Drawing.Point(475, 460)
+        $btnVoltar.Size = New-Object System.Drawing.Size(205, 42)
+        $btnVoltar.Font = New-Object System.Drawing.Font("Segoe UI", 10, [System.Drawing.FontStyle]::Bold)
         $btnVoltar.Add_Click({ $form.Close() })
         $form.Controls.Add($btnVoltar)
-        # Tira o foco da caixa de texto e passa para o botão "Repetir"
+
         $form.ActiveControl = $btnRepetir
-        # Força a janela a abrir em tamanho normal e pular para frente
         $form.WindowState = 'Normal'
         $form.TopMost = $true
-        
-        # Tira o foco da caixa de texto e passa para o botão "Repetir"
-        $form.ActiveControl = $btnRepetir
 
         # Exibe a interface e pausa o script até a janela fechar
         $form.ShowDialog() | Out-Null
-        
+
       
           # Sai do sub-loop e volta para a janela de busca principal
         $continuar = $false
